@@ -11,7 +11,6 @@ class DoctrineClassUtils
 	 * Gets the real class name of a class name that could be a proxy.
 	 *
 	 * @param string $class
-	 *
 	 * @return string
 	 */
 	public static function getRealClass(string $class): string
@@ -28,7 +27,6 @@ class DoctrineClassUtils
 	 * Gets the real class name of an object (even if its a proxy).
 	 *
 	 * @param object $object
-	 *
 	 * @return string
 	 */
 	// phpcs:ignore
