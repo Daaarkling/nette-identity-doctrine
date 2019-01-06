@@ -1,0 +1,64 @@
+{
+	"name": "darkling/nette-identity-doctrine",
+	"type": "nette-addon",
+	"keywords": ["nette", "doctrine", "orm", "security", "identity", "authentication"],
+	"authors": [
+		{
+			"name": "Michael Moravec"
+		},
+		{
+			"name": "Jan Vaňura"
+		}
+	],
+	"description": "Integration of entities implementing IIdentity in Nette 3",
+	"license": "MIT",
+	"config": {
+		"bin-dir": "bin",
+		"sort-packages": true
+	},
+	"scripts": {
+		"fix": "@fix:cs",
+		"check": [
+			"@check:composer-validate",
+			"@check:phpcs",
+			"@check:phpstan",
+			"@check:tests"
+		],
+		"check:composer-validate": "composer validate",
+		"check:phpcs": "php bin/phpcs --standard=build/phpcs.xml --extensions=php --encoding=utf-8 --tab-width=4 src tests",
+		"check:phpstan": "php bin/phpstan analyse -l 7 -c build/phpstan.neon src tests",
+		"check:tests": "php bin/phpunit -c build/phpunit.xml tests",
+		"fix:cs": "php bin/phpcbf --standard=build/phpcs.xml --extensions=php --encoding=utf-8 --tab-width=4 src tests"
+	},
+	"require": {
+		"php": ">=7.1",
+	  	"doctrine/orm": "^2.6",
+		"nette/di": "v3.0.0-beta2 as 2.4.14",
+		"nette/http": "v3.0.0-RC1 as 2.4",
+		"nette/security": "v3.0.0-RC1 as 2.4"
+	},
+	"require-dev": {
+		"consistence/coding-standard": "^3.7",
+		"nette/bootstrap": "v3.0.0-RC1 as 2.4",
+		"nettrine/orm": "^0.2",
+		"phpstan/phpstan": "^0.10",
+		"phpstan/phpstan-nette": "^0.10.1",
+		"phpstan/phpstan-strict-rules": "^0.10",
+		"phpunit/phpunit": "^7.5",
+		"slevomat/coding-standard": "^4.8",
+		"tracy/tracy": "v3.0.x-dev"
+	},
+	"suggest": {
+		"nettrine/orm": "Well-integrated Doctrine2 ORM for Nette Framework"
+	},
+	"autoload": {
+		"psr-4": {
+			"Darkling\\Doctrine2Identity\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Darkling\\Doctrine2Identity\\Tests\\": "tests"
+		}
+	}
+}

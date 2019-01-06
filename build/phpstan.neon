@@ -1,0 +1,9 @@
+parameters:
+	autoload_directories:
+		- %rootDir%/../../../src
+
+	ignoreErrors:
+		- '#Constant TEMP_DIR not found.#'
+
+includes:
+	- ../vendor/phpstan/phpstan-nette/extension.neon

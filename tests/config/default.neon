@@ -1,0 +1,17 @@
+services:
+	- Darkling\Doctrine2Identity\Tests\DatabaseLoader
+
+extensions:
+	dbal: Nettrine\DBAL\DI\DbalExtension
+	orm: Nettrine\ORM\DI\OrmExtension
+	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
+	- Darkling\Doctrine2Identity\DI\IdentityExtension
+
+dbal:
+	connection:
+		driver: pdo_sqlite
+		memory: true
+
+orm.annotations:
+	paths:
+		- tests/Entities
