@@ -31,7 +31,8 @@ class DoctrineClassUtils
 	 *
 	 * @return string
 	 */
-	public static function getClass(object $object): string
+	// phpcs:ignore
+	public static function getClass($object): string
 	{
 		return self::getRealClass(get_class($object));
 	}
