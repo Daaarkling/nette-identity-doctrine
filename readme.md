@@ -1,6 +1,6 @@
-# Nette 2 & Doctrine 2 entities
+# Nette 3 & Doctrine 2 entities
 
-Nette addon for using Doctrine 2 entities directly as Nette identity
+Nette addon for using Doctrine 2 entities directly as Nette identity. Based on [Majkl578/nette-identity-doctrine](https://github.com/Majkl578/nette-identity-doctrine)
 
 
 ## Motivation
@@ -27,7 +27,7 @@ Fortunately, this addon is here to help you with this task!
 2. Register extension in your configuration file in extensions section:
     ```yaml
     extensions:
-        doctrine2identity: Darkling\Doctrine2Identity\DI\IdentityExtension
+        - Darkling\Doctrine2Identity\DI\IdentityExtension
     ```
 
 3. Delete cache.
@@ -67,7 +67,7 @@ class UserEntity implements IIdentity
 
 	public function getRoles()
 	{
-		return array();
+		return [];
 	}
 }
 ```
