@@ -30,23 +30,25 @@
 		"check:tests": "php bin/phpunit -c build/phpunit.xml tests",
 		"fix:cs": "php bin/phpcbf --standard=build/phpcs.xml --extensions=php --encoding=utf-8 --tab-width=4 src tests"
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"require": {
 		"php": ">=7.1",
 	  	"doctrine/orm": "^2.6",
-		"nette/di": "v3.0.0-beta2 as 2.4.14",
-		"nette/http": "v3.0.0-RC1 as 2.4",
-		"nette/security": "v3.0.0-RC1 as 2.4"
+		"nette/di": "^3.0",
+		"nette/http": "^3.0",
+		"nette/security": "^3.0"
 	},
 	"require-dev": {
 		"consistence/coding-standard": "^3.7",
-		"nette/bootstrap": "v3.0.0-RC1 as 2.4",
+		"nette/bootstrap": "^3.0",
 		"nettrine/orm": "^0.2",
 		"phpstan/phpstan": "^0.10",
-		"phpstan/phpstan-nette": "^0.10.1",
+		"phpstan/phpstan-nette": "^0.10",
 		"phpstan/phpstan-strict-rules": "^0.10",
 		"phpunit/phpunit": "^7.5",
 		"slevomat/coding-standard": "^4.8",
-		"tracy/tracy": "v3.0.x-dev"
+		"tracy/tracy": "^3.0"
 	},
 	"suggest": {
 		"nettrine/orm": "Well-integrated Doctrine2 ORM for Nette Framework"
