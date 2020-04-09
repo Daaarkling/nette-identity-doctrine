@@ -2,7 +2,10 @@
 
 namespace Darkling\Doctrine2Identity\DI;
 
+use Darkling\Doctrine2Identity\UserStorage;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\ServiceDefinition;
+use Nette\Security\IUserStorage;
 
 class IdentityExtension extends CompilerExtension
 {
@@ -11,11 +14,11 @@ class IdentityExtension extends CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 
-		$userStorageDefinitionName = $builder->getByType('Nette\Security\IUserStorage') ?? 'nette.userStorage';
+		$userStorageDefinitionName = $builder->getByType(IUserStorage::class) ?? 'nette.userStorage';
 
-		/** @var \Nette\DI\Definitions\ServiceDefinition $definition */
+		/** @var ServiceDefinition $definition */
 		$definition = $builder->getDefinition($userStorageDefinitionName);
-		$definition->setFactory('Darkling\Doctrine2Identity\UserStorage');
+		$definition->setFactory(UserStorage::class);
 	}
 
 }

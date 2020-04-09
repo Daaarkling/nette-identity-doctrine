@@ -25,29 +25,29 @@
 			"@check:tests"
 		],
 		"check:composer-validate": "composer validate",
-		"check:phpcs": "php bin/phpcs --standard=build/phpcs.xml --extensions=php --encoding=utf-8 --tab-width=4 src tests",
-		"check:phpstan": "php bin/phpstan analyse -l 7 -c build/phpstan.neon src tests",
-		"check:tests": "php bin/phpunit -c build/phpunit.xml tests",
-		"fix:cs": "php bin/phpcbf --standard=build/phpcs.xml --extensions=php --encoding=utf-8 --tab-width=4 src tests"
+		"check:phpcs": "bin/phpcs --standard=build/phpcs.xml --extensions=php --encoding=utf-8 --tab-width=4 src tests",
+		"check:phpstan": "bin/phpstan analyse -l 7 -c build/phpstan.neon src tests",
+		"check:tests": "bin/phpunit -c build/phpunit.xml tests",
+		"fix:cs": "bin/phpcbf --standard=build/phpcs.xml --extensions=php --encoding=utf-8 --tab-width=4 src tests"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
-		"php": ">=7.1",
+		"php": ">=7.4",
 	  	"doctrine/orm": "^2.6",
 		"nette/di": "^3.0",
 		"nette/http": "^3.0",
 		"nette/security": "^3.0"
 	},
 	"require-dev": {
-		"consistence/coding-standard": "^3.7",
+		"consistence/coding-standard": "^3.10",
 		"nette/bootstrap": "^3.0",
-		"nettrine/orm": "^0.2",
-		"phpstan/phpstan": "^0.10",
-		"phpstan/phpstan-nette": "^0.10",
-		"phpstan/phpstan-strict-rules": "^0.10",
+		"nettrine/orm": "^0.5",
+		"phpstan/phpstan": "^0.12",
+		"phpstan/phpstan-nette": "^0.12",
+		"phpstan/phpstan-strict-rules": "^0.12",
 		"phpunit/phpunit": "^7.5",
-		"slevomat/coding-standard": "^4.8",
+		"slevomat/coding-standard": "6.2 as 6.0.99",
 		"tracy/tracy": "^3.0"
 	},
 	"suggest": {

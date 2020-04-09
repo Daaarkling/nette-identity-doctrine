@@ -10,8 +10,7 @@ class FakeIdentity implements IIdentity
 	/** @var mixed */
 	private $id;
 
-	/** @var string */
-	private $class;
+	private string $class;
 
 	/**
 	 * @param mixed $id

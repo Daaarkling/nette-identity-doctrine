@@ -15,15 +15,11 @@ class User implements IIdentity
 	 * @ORM\Id
 	 * @ORM\GeneratedValue
 	 * @ORM\Column(type="integer")
-	 * @var int
 	 */
-	private $id;
+	private int $id;
 
-	/**
-	 * @ORM\Column(type="string")
-	 * @var string
-	 */
-	private $name;
+	/** @ORM\Column(type="string") */
+	private string $name;
 
 	public function __construct(string $name)
 	{
