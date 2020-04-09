@@ -4,21 +4,18 @@ namespace Darkling\Doctrine2Identity\Tests;
 
 use Darkling\Doctrine2Identity\Tests\Entities\User;
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Decorator\EntityManagerDecorator;
 
 class DatabaseLoader
 {
 
-	/** @var bool */
-	private $isDbPrepared = false;
+	private bool $isDbPrepared = false;
 
-	/** @var \Doctrine\DBAL\Connection */
-	private $connection;
+	private Connection $connection;
 
-	/** @var \Doctrine\ORM\EntityManager */
-	private $entityManager;
+	private EntityManagerDecorator $entityManager;
 
-	public function __construct(Connection $connection, EntityManager $entityManager)
+	public function __construct(Connection $connection, EntityManagerDecorator $entityManager)
 	{
 		$this->connection = $connection;
 		$this->entityManager = $entityManager;

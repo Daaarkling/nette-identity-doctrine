@@ -3,6 +3,10 @@
 namespace Darkling\Doctrine2Identity\Utils;
 
 use Doctrine\ORM\Proxy\Proxy;
+use Nette\Security\IIdentity;
+use function get_class;
+use function strrpos;
+use function substr;
 
 class DoctrineClassUtils
 {
@@ -26,11 +30,11 @@ class DoctrineClassUtils
 	/**
 	 * Gets the real class name of an object (even if its a proxy).
 	 *
-	 * @param object $object
+	 * @param IIdentity $object
 	 * @return string
 	 */
 	// phpcs:ignore
-	public static function getClass($object): string
+	public static function getClass(IIdentity $object): string
 	{
 		return self::getRealClass(get_class($object));
 	}

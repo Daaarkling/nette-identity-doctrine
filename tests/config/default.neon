@@ -2,10 +2,12 @@ services:
 	- Darkling\Doctrine2Identity\Tests\DatabaseLoader
 
 extensions:
+	- Darkling\Doctrine2Identity\DI\IdentityExtension
 	dbal: Nettrine\DBAL\DI\DbalExtension
+	nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+	nettrine.cache: Nettrine\Cache\DI\CacheExtension
 	orm: Nettrine\ORM\DI\OrmExtension
 	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
-	- Darkling\Doctrine2Identity\DI\IdentityExtension
 
 dbal:
 	connection:

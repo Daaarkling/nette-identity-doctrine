@@ -2,27 +2,28 @@
 
 namespace Darkling\Doctrine2Identity\Tests;
 
+use Darkling\Doctrine2Identity\Tests\Entities\User;
+use Darkling\Doctrine2Identity\UserStorage;
+use Doctrine\ORM\Decorator\EntityManagerDecorator;
+use Nette\DI\Container;
 use Nette\Security\Identity;
+use Nette\Security\IUserStorage;
 use PHPUnit\Framework\TestCase;
 
 class UserStorageTest extends TestCase
 {
 
-	private const IDENTITY_CLASS = 'Darkling\Doctrine2Identity\Tests\Entities\User';
-	private const I_USER_STORAGE_CLASS = 'Nette\Security\IUserStorage';
-	private const USER_STORAGE_CLASS = 'Darkling\Doctrine2Identity\UserStorage';
+	private const IDENTITY_CLASS = User::class;
+	private const I_USER_STORAGE_CLASS = IUserStorage::class;
+	private const USER_STORAGE_CLASS = UserStorage::class;
 
-	/** @var \Nette\DI\Container */
-	private $container;
+	private Container $container;
 
-	/** @var \Nette\Security\IUserStorage */
-	private $userStorage;
+	private IUserStorage $userStorage;
 
-	/** @var \Doctrine\ORM\EntityManager */
-	private $entityManager;
+	private EntityManagerDecorator $entityManager;
 
-	/** @var \Darkling\Doctrine2Identity\Tests\DatabaseLoader */
-	private $databaseLoader;
+	private DatabaseLoader $databaseLoader;
 
 	protected function setUp(): void
 	{
@@ -30,8 +31,8 @@ class UserStorageTest extends TestCase
 		$this->container = $containerFactory->create();
 
 		$this->userStorage = $this->container->getByType(self::I_USER_STORAGE_CLASS) ?? $this->container->getService('nette.userStorage');
-		$this->entityManager = $this->container->getByType('Doctrine\ORM\EntityManager');
-		$this->databaseLoader = $this->container->getByType('Darkling\Doctrine2Identity\Tests\DatabaseLoader');
+		$this->entityManager = $this->container->getByType(EntityManagerDecorator::class);
+		$this->databaseLoader = $this->container->getByType(DatabaseLoader::class);
 	}
 
 	public function testInstance(): void
@@ -54,14 +55,14 @@ class UserStorageTest extends TestCase
 	{
 		$this->databaseLoader->loadUserTableWithOneItem();
 		$userRepository = $this->entityManager->getRepository(self::IDENTITY_CLASS);
-		/** @var \Darkling\Doctrine2Identity\Tests\Entities\User $user */
+		/** @var User $user */
 		$user = $userRepository->find(1);
 
 		$userStorage = $this->userStorage->setIdentity($user);
 		$this->assertInstanceOf(self::I_USER_STORAGE_CLASS, $userStorage);
 		$this->assertInstanceOf(self::USER_STORAGE_CLASS, $userStorage);
 
-		/** @var \Darkling\Doctrine2Identity\Tests\Entities\User $userIdentity */
+		/** @var User $userIdentity */
 		$userIdentity = $userStorage->getIdentity();
 		$this->assertSame($user, $userIdentity);
 		$this->assertSame(1, $userIdentity->getId());
@@ -72,7 +73,7 @@ class UserStorageTest extends TestCase
 	{
 		$this->databaseLoader->loadUserTableWithOneItem();
 		$userRepository = $this->entityManager->getRepository(self::IDENTITY_CLASS);
-		/** @var \Darkling\Doctrine2Identity\Tests\Entities\User $userProxy */
+		/** @var User $userProxy */
 		$userProxy = $this->entityManager->getProxyFactory()->getProxy(self::IDENTITY_CLASS, ['id' => 1]);
 		$user = $userRepository->find(1);
 
@@ -80,7 +81,7 @@ class UserStorageTest extends TestCase
 		$this->assertInstanceOf(self::I_USER_STORAGE_CLASS, $userStorage);
 		$this->assertInstanceOf(self::USER_STORAGE_CLASS, $userStorage);
 
-		/** @var \Darkling\Doctrine2Identity\Tests\Entities\User $userIdentity */
+		/** @var User $userIdentity */
 		$userIdentity = $userStorage->getIdentity();
 		$this->assertSame($user, $userIdentity);
 		$this->assertNotSame($userProxy, $userIdentity);

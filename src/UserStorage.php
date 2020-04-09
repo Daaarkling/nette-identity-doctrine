@@ -3,25 +3,23 @@
 namespace Darkling\Doctrine2Identity;
 
 use Darkling\Doctrine2Identity\Utils\DoctrineClassUtils;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Decorator\EntityManagerDecorator;
 use Nette\Http\Session;
-use Nette\Http\UserStorage as NetteUserStorage;
 use Nette\Security\IIdentity;
 
-class UserStorage extends NetteUserStorage
+class UserStorage extends \Nette\Http\UserStorage
 {
 
-	/** @var \Doctrine\ORM\EntityManager */
-	private $entityManager;
+	private EntityManagerDecorator $entityManager;
 
-	public function __construct(Session $sessionHandler, EntityManager $entityManager)
+	public function __construct(Session $sessionHandler, EntityManagerDecorator $entityManager)
 	{
 		parent::__construct($sessionHandler);
 
 		$this->entityManager = $entityManager;
 	}
 
-	public function setIdentity(?IIdentity $identity): self
+	public function setIdentity(?IIdentity $identity): \Nette\Http\UserStorage
 	{
 		if ($identity !== null) {
 			$class = DoctrineClassUtils::getClass($identity);
@@ -48,8 +46,9 @@ class UserStorage extends NetteUserStorage
 		// convert it back into the real entity
 		// returning reference provides potentially lazy behavior
 		if ($identity instanceof FakeIdentity) {
-			/** @var \Nette\Security\IIdentity $entity */
+			/** @var IIdentity $entity */
 			$entity = $this->entityManager->getReference($identity->getClass(), $identity->getId());
+
 			return $entity;
 		}
 

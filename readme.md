@@ -13,7 +13,7 @@ Fortunately, this addon is here to help you with this task!
 
 ## Requirements
 
-- PHP 7.1+
+- PHP 7.4+
 - Nette 3
 - Doctrine ORM 2.6+
 
